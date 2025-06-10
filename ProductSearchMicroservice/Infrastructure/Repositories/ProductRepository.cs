@@ -5,7 +5,7 @@ using ProductSearchMicroservice.Infrastructure.ApplicationDbContext;
 
 namespace ProductSearchMicroservice.Infrastructure.Repositories;
 
-public class ProductRepository(ApplicationDbContext.ApplicationDbContext dbContext) : IProductRepository
+public class ProductRepository(IApplicationDbContext dbContext) : IProductRepository
 {
     public async Task<List<Product>> GetAll()
     {
