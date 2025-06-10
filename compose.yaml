@@ -1,0 +1,33 @@
+﻿services:
+  postgres:
+    image: postgres:17
+    container_name: db_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-net
+
+  productsearchmicroservice:
+    image: productsearchmicroservice
+    build:
+      context: .
+      dockerfile: ProductSearchMicroservice/Dockerfile
+    environment:
+      CONNECTION_STRING: "Host=localhost:${POSTGRES_PORT};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};Database=${POSTGRES_DB}"
+    ports:
+      - "${APP_PORT}:8080"
+    networks:
+      - app-net
+
+volumes:
+  postgres_data:
+
+networks:
+  app-net:
+    driver: bridge
