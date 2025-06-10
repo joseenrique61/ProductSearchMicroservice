@@ -1,4 +1,4 @@
-namespace ProductSearchMicroservice.Models;
+namespace ProductSearchMicroservice.Domain.Models;
 
 public class Product
 {

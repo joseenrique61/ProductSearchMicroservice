@@ -15,11 +15,11 @@
 
   productsearchmicroservice:
     image: productsearchmicroservice
+    depends_on:
+      - postgres
     build:
       context: .
       dockerfile: ProductSearchMicroservice/Dockerfile
-    environment:
-      CONNECTION_STRING: "Host=localhost:${POSTGRES_PORT};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};Database=${POSTGRES_DB}"
     ports:
       - "${APP_PORT}:8080"
     networks:
