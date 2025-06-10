@@ -15,10 +15,17 @@ public class ProductController(IProductRepository productRepository)
         return await productRepository.GetAll();
     }
 
-    // [HttpGet]
-    // [Route("id/{id}")]
-    // public Product? GetById(int id)
-    // {
-    //
-    // }
+    [HttpGet]
+    [Route("id/{id}")]
+    public async Task<Product?> GetById(int id)
+    {
+        return await productRepository.GetByIdAsync(id);
+    }
+
+    [HttpGet]
+    [Route("name/{name}")]
+    public async Task<Product?> GetByName(string name)
+    {
+        return await productRepository.GetByNameAsync(name);
+    }
 }

@@ -12,13 +12,13 @@ public class ProductRepository(IApplicationDbContext dbContext) : IProductReposi
         return await dbContext.Products.ToListAsync();
     }
 
-    public Task<Product> GetByIdAsync(int id)
+    public async Task<Product?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await dbContext.Products.FindAsync(id);
     }
 
-    public Task<Product> GetByNameAsync(string name)
+    public async Task<Product?> GetByNameAsync(string name)
     {
-        throw new NotImplementedException();
+        return await dbContext.Products.FirstAsync(x => x.Name == name);
     }
 }
